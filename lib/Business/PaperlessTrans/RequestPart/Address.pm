@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use namespace::autoclean;
 
-our $VERSION = '0.001000'; # VERSION
+our $VERSION = '0.001004'; # VERSION
 
 use Moose;
 
@@ -14,26 +14,28 @@ with qw(
 	Business::PaperlessTrans::Role::State
 );
 
+use MooseX::Types::Common::String qw( NonEmptySimpleStr );
+
 has street => (
-	isa         => 'Str',
+	isa         => NonEmptySimpleStr,
 	is          => 'ro',
 	remote_name => 'Street',
 );
 
 has city => (
-	isa         => 'Str',
+	isa         => NonEmptySimpleStr,
 	is          => 'ro',
 	remote_name => 'City',
 );
 
 has country => (
-	isa         => 'Str',
+	isa         => NonEmptySimpleStr,
 	is          => 'ro',
 	remote_name => 'Country',
 );
 
 has zip => (
-	isa         => 'Str',
+	isa         => NonEmptySimpleStr,
 	is          => 'ro',
 	remote_name => 'Zip',
 );
@@ -52,7 +54,7 @@ Business::PaperlessTrans::RequestPart::Address - Address
 
 =head1 VERSION
 
-version 0.001000
+version 0.001004
 
 =head1 ATTRIBUTES
 

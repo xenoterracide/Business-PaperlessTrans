@@ -3,13 +3,14 @@ use strict;
 use warnings;
 use namespace::autoclean;
 
-our $VERSION = '0.001000'; # VERSION
+our $VERSION = '0.001004'; # VERSION
 
 use Moose::Role;
 use MooseX::RemoteHelper;
+use MooseX::Types::Common::String qw( NonEmptySimpleStr );
 
 has state => (
-	isa         => 'Str',
+	isa         => NonEmptySimpleStr,
 	is          => 'ro',
 	remote_name => 'State',
 );
@@ -27,7 +28,7 @@ Business::PaperlessTrans::Role::State - State
 
 =head1 VERSION
 
-version 0.001000
+version 0.001004
 
 =head1 AUTHOR
 

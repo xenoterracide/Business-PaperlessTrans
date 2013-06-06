@@ -3,34 +3,36 @@ use strict;
 use warnings;
 use namespace::autoclean;
 
-our $VERSION = '0.001000'; # VERSION
+our $VERSION = '0.001004'; # VERSION
 
 use Moose;
 extends 'Business::PaperlessTrans::MessagePart';
 
+use MooseX::Types::Common::String qw( SimpleStr );
 use Moose::Util::TypeConstraints  qw( enum      );
+use MooseX::Types::UUID           qw( UUID      );
 
 has transaction_id => (
 	remote_name => 'TransactionID',
-	isa         => 'Str',
+	isa         => UUID|SimpleStr,
 	is          => 'ro',
 );
 
 has code => (
 	remote_name => 'ResponseCode',
-	isa         => 'Int',
+	isa         => enum( [qw( 0 1 2 )] ),
 	is          => 'ro',
 );
 
 has message => (
 	remote_name => 'Message',
-	isa         => 'Str',
+	isa         => SimpleStr,
 	is          => 'ro',
 );
 
 has timestamp => (
 	remote_name => 'DateTimeStamp',
-	isa         => 'Str',
+	isa         => SimpleStr,
 	is          => 'ro',
 );
 
@@ -48,7 +50,7 @@ Business::PaperlessTrans::Response - Base Response
 
 =head1 VERSION
 
-version 0.001000
+version 0.001004
 
 =head1 AUTHOR
 

@@ -1,10 +1,10 @@
 use strict;
 use warnings;
 use Test::More;
+use Test::Method;
 use Class::Load 0.20 'load_class';
 
 my $prefix = 'Business::PaperlessTrans::RequestPart::';
-my $dtc    = load_class('DateTime');
 
 my $address
 	= new_ok( load_class( $prefix . 'Address' ) => [{
@@ -21,21 +21,21 @@ my $obj
 		state      => 'TX',
 		number     => '12345678',
 		address    => $address,
-		expiration => $dtc->new(
+		expiration => {
 			day   => 12,
 			month => 12,
 			year  => 2009,
-		),
-		date_of_birth => $dtc->new(
+		},
+		date_of_birth => {
 			day   => 12,
 			month => 12,
 			year  => 1965,
-		),
+		},
 	}]);
 
 can_ok $obj, 'serialize';
 
-is_deeply $obj->serialize, {
+method_ok $obj, serialize => [], {
 	IDType     => 1,
 	State      => 'TX',
 	Number     => '12345678',

@@ -1,16 +1,15 @@
 use strict;
 use warnings;
 use Test::More;
+use Test::Method;
 use Class::Load 0.20 'load_class';
-
-plan skip_all => 'PERL_BUSINESS_BACKOFFICE_USERNAME and/or'
-	. 'PERL_BUSINESS_BACKOFFICE_PASSWORD not defined in ENV'
-	unless defined $ENV{PERL_BUSINESS_BACKOFFICE_USERNAME}
-	&& defined $ENV{PERL_BUSINESS_BACKOFFICE_PASSWORD};
+use Test::Requires::Env qw(
+	PERL_BUSINESS_BACKOFFICE_USERNAME
+	PERL_BUSINESS_BACKOFFICE_PASSWORD
+);
 
 my $req_prefix = 'Business::PaperlessTrans::Request';
 my $prefix     = $req_prefix . 'Part::';
-my $dtc        = load_class('DateTime');
 
 my $token
 	= new_ok( load_class( $prefix . 'AuthenticationToken' ) => [{
@@ -38,16 +37,16 @@ my $id
 		state      => 'TX',
 		number     => '12345678',
 		address    => $address,
-		expiration => $dtc->new(
+		expiration => {
 			day   => 12,
 			month => 12,
 			year  => 2009,
-		),
-		date_of_birth => $dtc->new(
+		},
+		date_of_birth => {
 			day   => 12,
 			month => 12,
 			year  => 1965,
-		),
+		},
 	}]);
 
 my $check
@@ -69,14 +68,14 @@ my $req
 		token        => $token,
 	}]);
 
-is $req->type, 'ProcessACH';
+method_ok $req, type => [], 'ProcessACH';
 
 my $res = $client->submit( $req );
 
 isa_ok $res, 'Business::PaperlessTrans::Response::ProcessACH';
 
-ok $res->is_accepted;
-is $res->code,     0;
-is $res->message, '';
+method_ok $res, is_accepted => [], 1;
+method_ok $res, code        => [], 0;
+method_ok $res, message     => [], '';
 
 done_testing;

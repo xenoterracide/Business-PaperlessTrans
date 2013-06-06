@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use namespace::autoclean;
 
-our $VERSION = '0.001000'; # VERSION
+our $VERSION = '0.001004'; # VERSION
 
 use Moose;
 
@@ -16,38 +16,61 @@ with qw(
 	Business::PaperlessTrans::Role::EmailAddress
 );
 
+use MooseX::Types::Common::String qw( NonEmptySimpleStr );
+use MooseX::Types::CreditCard 0.002 qw(
+	CardNumber
+	CardExpiration
+	CardSecurityCode
+);
+
 has number => (
-	isa         => 'Str',
+	isa         => CardNumber,
 	is          => 'ro',
 	required    => 1,
 	remote_name => 'CardNumber',
 );
 
 has security_code => (
-    isa         => 'Str',
+    isa         => CardSecurityCode,
     remote_name => 'SecurityCode',
     predicate   => 'has_security_code',
     is          => 'ro',
 );
 
 has track_data => (
-	isa         => 'Str',
+	isa         => NonEmptySimpleStr,
 	is          => 'ro',
 	remote_name => 'TrackData',
 );
 
-has expiration_month => (
+has expiration => (
+	isa         => CardExpiration,
+	is          => 'ro',
+	required    => 1,
+	coerce      => 1,
+	handles     => [qw( month year )],
+);
+
+has _expiration_month => (
 	isa         => 'Int',
 	remote_name => 'ExpirationMonth',
 	is          => 'ro',
-	required    => 1,
+	lazy        => 1,
+	reader      => undef,
+	writer      => undef,
+	init_arg    => undef,
+	default     => sub { shift->expiration->month },
 );
 
-has expiration_year => (
-	remote_name => 'ExpirationYear',
+has _expiration_year => (
 	isa         => 'Int',
+	remote_name => 'ExpirationYear',
 	is          => 'ro',
-	required    => 1,
+	lazy        => 1,
+	reader      => undef,
+	writer      => undef,
+	init_arg    => undef,
+	default     => sub { shift->expiration->year },
 );
 
 __PACKAGE__->meta->make_immutable;
@@ -64,7 +87,7 @@ Business::PaperlessTrans::RequestPart::Card - Card
 
 =head1 VERSION
 
-version 0.001000
+version 0.001004
 
 =head1 AUTHOR
 

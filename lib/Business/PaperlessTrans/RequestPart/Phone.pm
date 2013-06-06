@@ -3,21 +3,23 @@ use strict;
 use warnings;
 use namespace::autoclean;
 
-our $VERSION = '0.001000'; # VERSION
+our $VERSION = '0.001004'; # VERSION
 
 use Moose;
 
 extends 'Business::PaperlessTrans::MessagePart';
 
+use MooseX::Types::Common::String qw( NonEmptySimpleStr );
+
 has number => (
 	remote_name => 'Number',
-	isa         => 'Str',
+	isa         => NonEmptySimpleStr,
 	is          => 'ro',
 );
 
 has type => (
 	remote_name => 'Type',
-	isa         => 'Str',
+	isa         => NonEmptySimpleStr,
 	is          => 'ro',
 );
 
@@ -35,7 +37,7 @@ Business::PaperlessTrans::RequestPart::Phone - Phone
 
 =head1 VERSION
 
-version 0.001000
+version 0.001004
 
 =head1 AUTHOR
 

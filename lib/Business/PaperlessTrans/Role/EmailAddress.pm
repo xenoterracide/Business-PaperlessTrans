@@ -3,14 +3,15 @@ use strict;
 use warnings;
 use namespace::autoclean;
 
-our $VERSION = '0.001000'; # VERSION
+our $VERSION = '0.001004'; # VERSION
 
 use Moose::Role;
 use MooseX::RemoteHelper;
+use MooseX::Types::Email          qw( EmailAddress      );
 
 has email_address => (
 	remote_name => 'EmailAddress',
-	isa         => 'Str',
+	isa         => EmailAddress,
 	is          => 'ro',
 );
 
@@ -27,7 +28,7 @@ Business::PaperlessTrans::Role::EmailAddress - Email address used with Custom Ma
 
 =head1 VERSION
 
-version 0.001000
+version 0.001004
 
 =head1 AUTHOR
 

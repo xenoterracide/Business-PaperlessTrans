@@ -2,7 +2,7 @@ NAME
     Business::PaperlessTrans::Client - PaperlessTrans Client object
 
 VERSION
-    version 0.001000
+    version 0.001004
 
 DESCRIPTION
     PaperlessTrans is a secure and seamless bridge between your IT
@@ -13,10 +13,6 @@ DESCRIPTION
 METHODS
   submit
             my $response = $client->submit( $request );
-
-ACKNOWLEDGMENTS
-    This code contains pieces of File::ShareDir that were directly copied
-    and pasted. Thanks ot Adam Kennedy for creating it.
 
 AUTHOR
     Caleb Cushing <xenoterracide@gmail.com>

@@ -1,11 +1,11 @@
 use strict;
 use warnings;
 use Test::More;
+use Test::Method;
 use Class::Load 0.20 'load_class';
 
 my $req_prefix = 'Business::PaperlessTrans::Request';
 my $prefix     = $req_prefix . 'Part::';
-my $dtc        = load_class('DateTime');
 
 
 my $address
@@ -31,16 +31,16 @@ my $id
 		state      => 'TX',
 		number     => '12345678',
 		address    => $address,
-		expiration => $dtc->new(
+		expiration => {
 			day   => 12,
 			month => 12,
 			year  => 2009,
-		),
-		date_of_birth => $dtc->new(
+		},
+		date_of_birth => {
 			day   => 12,
 			month => 12,
 			year  => 1965,
-		),
+		},
 	}]);
 
 my $token
@@ -61,9 +61,9 @@ my $obj
 
 can_ok    $obj, 'serialize';
 can_ok    $obj, 'type';
-is        $obj->type, 'ProcessACH';
+method_ok $obj, type => [], 'ProcessACH';
 
-is_deeply $obj->serialize, {
+method_ok $obj, serialize => [], {
 	Token => {
 		TerminalID  => '00000000-0000-0000-0000-000000000000',
 		TerminalKey => '000000000',
