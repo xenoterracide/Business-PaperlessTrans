@@ -168,6 +168,24 @@ PaperlessTrans is a secure and seamless bridge between your IT infrastructure an
 the Paperless Transactions cloud. This service enables your organization to
 connect directly and securely for processing credit card and ACH transactions.
 
+=head1 WITH
+
+uses the standard interface provided by:
+
+L<MooseY::RemoteHelper::Role::Client>
+
 =method submit
 
 	my $response = $client->submit( $request );
+
+=attr user
+
+Terminal ID
+
+=attr pass
+
+Terminal Key
+
+=attr debug
+
+=attr test
