@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use namespace::autoclean;
 
-our $VERSION = '0.001004'; # VERSION
+our $VERSION = '0.001005'; # VERSION
 
 use Moose;
 use Class::Load 0.20 'load_class';
@@ -17,16 +17,12 @@ use XML::Compile::WSDL11;
 use XML::Compile::SOAP11;
 use XML::Compile::Transport::SOAPHTTP;
 
+with 'MooseY::RemoteHelper::Role::Client';
+
 sub submit {
 	my ( $self, $request ) = @_;
 
-	my %request;
-	if ( $request->type eq 'TestConnection' ) {
-		%request = ( %{ $request->serialize });
-	}
-	else {
-		%request = ( req => $request->serialize );
-	}
+	my %request = %{ $self->_finalize_request( $request ) };
 
 	Dumper %request if $self->debug >= 1;
 
@@ -42,6 +38,32 @@ sub submit {
 	my $res_c = 'Business::PaperlessTrans::Response::' . $request->type;
 
 	return load_class( $res_c )->new( $res );
+}
+
+sub _finalize_request {
+	my ( $self, $request ) = @_;
+
+	my %request;
+	if ( $request->type eq 'TestConnection' ) {
+		%request = ( %{ $request->serialize },
+			token => {
+				TerminalID  => $self->user,
+				TerminalKey => $self->pass,
+			},
+		);
+	}
+	else {
+		%request = ( req => {
+			%{ $request->serialize },
+			Token => {
+				TerminalID  => $self->user,
+				TerminalKey => $self->pass,
+			},
+			TestMode => $self->test ? 'True' : 'False',
+		});
+	}
+
+	return \%request;
 }
 
 sub _build_calls {
@@ -100,13 +122,6 @@ sub _build_xsd_files {
 	return \@xsd;
 }
 
-has debug => (
-	isa      => 'Int',
-	is       => 'ro',
-	lazy     => 1,
-	default  => 0,
-);
-
 has _calls => (
 	isa     => 'HashRef',
 	traits  => ['Hash'],
@@ -157,7 +172,7 @@ Business::PaperlessTrans::Client - PaperlessTrans Client object
 
 =head1 VERSION
 
-version 0.001004
+version 0.001005
 
 =head1 DESCRIPTION
 
@@ -165,11 +180,31 @@ PaperlessTrans is a secure and seamless bridge between your IT infrastructure an
 the Paperless Transactions cloud. This service enables your organization to
 connect directly and securely for processing credit card and ACH transactions.
 
+=head1 ATTRIBUTES
+
+=head2 user
+
+Terminal ID
+
+=head2 pass
+
+Terminal Key
+
+=head2 debug
+
+=head2 test
+
 =head1 METHODS
 
 =head2 submit
 
 	my $response = $client->submit( $request );
+
+=head1 WITH
+
+uses the standard interface provided by:
+
+L<MooseY::RemoteHelper::Role::Client>
 
 =head1 AUTHOR
 

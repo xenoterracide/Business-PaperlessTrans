@@ -3,10 +3,10 @@ use strict;
 use warnings;
 use namespace::autoclean;
 
-our $VERSION = '0.001004'; # VERSION
+our $VERSION = '0.001005'; # VERSION
 
 use Moose;
-extends 'Business::PaperlessTrans::MessagePart';
+extends 'MooseY::RemoteHelper::MessagePart';
 
 use MooseX::Types::Common::String qw( SimpleStr );
 use Moose::Util::TypeConstraints  qw( enum      );
@@ -50,7 +50,7 @@ Business::PaperlessTrans::Response - Base Response
 
 =head1 VERSION
 
-version 0.001004
+version 0.001005
 
 =head1 AUTHOR
 

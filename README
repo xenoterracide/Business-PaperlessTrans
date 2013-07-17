@@ -2,7 +2,7 @@ NAME
     Business::PaperlessTrans::Client - PaperlessTrans Client object
 
 VERSION
-    version 0.001004
+    version 0.001005
 
 DESCRIPTION
     PaperlessTrans is a secure and seamless bridge between your IT
@@ -10,9 +10,23 @@ DESCRIPTION
     enables your organization to connect directly and securely for
     processing credit card and ACH transactions.
 
+ATTRIBUTES
+  user
+    Terminal ID
+
+  pass
+    Terminal Key
+
+  debug
+  test
 METHODS
   submit
             my $response = $client->submit( $request );
+
+WITH
+    uses the standard interface provided by:
+
+    MooseY::RemoteHelper::Role::Client
 
 AUTHOR
     Caleb Cushing <xenoterracide@gmail.com>

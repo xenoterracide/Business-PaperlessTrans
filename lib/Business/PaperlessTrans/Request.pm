@@ -3,10 +3,10 @@ use strict;
 use warnings;
 use namespace::autoclean;
 
-our $VERSION = '0.001004'; # VERSION
+our $VERSION = '0.001005'; # VERSION
 
 use Moose;
-extends 'Business::PaperlessTrans::MessagePart';
+extends 'MooseY::RemoteHelper::MessagePart';
 
 use Class::Load 0.20 'load_class';
 
@@ -21,32 +21,12 @@ has type => (
 	builder => '_build_type',
 );
 
-has token => (
-	remote_name => 'Token',
-	isa         => 'Business::PaperlessTrans::RequestPart::AuthenticationToken',
-	is          => 'rw',
-	required    => 1,
-);
-
 has custom_fields => (
 	remote_name => 'CustomFields',
 	isa         => 'Business::PaperlessTrans::RequestPart::CustomFields',
 	is          => 'ro',
 	default     => sub {
 		load_class('Business::PaperlessTrans::RequestPart::CustomFields')->new
-	},
-);
-
-has test => (
-	remote_name => 'TestMode',
-	isa         => 'Bool',
-	is          => 'ro',
-	lazy        => 1,
-	default     => 1,
-	serializer  => sub {
-		my ( $attr, $instance ) = @_;
-
-		return $attr->get_value( $instance ) ? 'True' : 'False';
 	},
 );
 
@@ -64,7 +44,7 @@ Business::PaperlessTrans::Request - AuthorizeCard Request
 
 =head1 VERSION
 
-version 0.001004
+version 0.001005
 
 =head1 AUTHOR
 

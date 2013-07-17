@@ -43,7 +43,8 @@ my %WriteMakefileArgs = (
     "MooseX::Types::Locale::Currency" => 0,
     "MooseX::Types::Path::Class" => 0,
     "MooseX::Types::UUID" => 0,
-    "MooseX::UndefTolerant" => 0,
+    "MooseY::RemoteHelper::MessagePart" => 0,
+    "MooseY::RemoteHelper::Role::Client" => 0,
     "XML::Compile::SOAP11" => 0,
     "XML::Compile::Transport::SOAPHTTP" => 0,
     "XML::Compile::WSDL11" => 0,
@@ -56,7 +57,7 @@ my %WriteMakefileArgs = (
     "Test::More" => "0.88",
     "Test::Requires::Env" => 0
   },
-  "VERSION" => "0.001004",
+  "VERSION" => "0.001005",
   "test" => {
     "TESTS" => "t/*.t t/request/*.t"
   }

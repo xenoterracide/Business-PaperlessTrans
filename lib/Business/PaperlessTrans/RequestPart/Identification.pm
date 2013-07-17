@@ -3,11 +3,11 @@ use strict;
 use warnings;
 use namespace::autoclean;
 
-our $VERSION = '0.001004'; # VERSION
+our $VERSION = '0.001005'; # VERSION
 
 use Moose;
 
-extends 'Business::PaperlessTrans::MessagePart';
+extends 'MooseY::RemoteHelper::MessagePart';
 with qw(
 	MooseX::RemoteHelper::CompositeSerialization
 	Business::PaperlessTrans::Role::State
@@ -68,7 +68,7 @@ Business::PaperlessTrans::RequestPart::Identification - Identification
 
 =head1 VERSION
 
-version 0.001004
+version 0.001005
 
 =head1 AUTHOR
 

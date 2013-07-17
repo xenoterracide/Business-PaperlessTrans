@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use namespace::autoclean;
 
-our $VERSION = '0.001004'; # VERSION
+our $VERSION = '0.001005'; # VERSION
 
 use Moose;
 extends 'Business::PaperlessTrans::Response';
@@ -27,7 +27,7 @@ Business::PaperlessTrans::Response::AuthorizeCard - Authorized Card Response
 
 =head1 VERSION
 
-version 0.001004
+version 0.001005
 
 =head1 AUTHOR
 

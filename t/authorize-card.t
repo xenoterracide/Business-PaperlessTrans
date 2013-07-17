@@ -48,15 +48,8 @@ my $card
 		},
 	}]);
 
-my $token
-	= new_ok( load_class( $prefix . 'AuthenticationToken' ) => [{
-		terminal_id  => '00000000-0000-0000-0000-000000000000',
-		terminal_key => '000000000',
-	}]);
-
 my $obj
 	= new_ok( load_class( $req_prefix . '::AuthorizeCard' ) => [{
-		token        => $token,
 		amount       => 9.65,
 		currency     => 'USD',
 		card         => $card,
@@ -66,11 +59,6 @@ my $obj
 can_ok $obj, 'serialize';
 
 method_ok $obj, serialize => [], {
-	Token => {
-		TerminalID  => '00000000-0000-0000-0000-000000000000',
-		TerminalKey => '000000000',
-	},
-	TestMode     => 'True',
 	Amount       => 9.65,
 	Currency     => 'USD',
 	CardPresent  => 0,

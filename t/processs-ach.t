@@ -43,20 +43,12 @@ my $id
 		},
 	}]);
 
-my $token
-	= new_ok( load_class( $prefix . 'AuthenticationToken' ) => [{
-		terminal_id  => '00000000-0000-0000-0000-000000000000',
-		terminal_key => '000000000',
-	}]);
-
 my $obj
 	= new_ok( load_class( $req_prefix . '::ProcessACH' ) => [{
 		amount       => 4.22,
 		currency     => 'USD',
 		check_number => '022',
 		check        => $check,
-		test         => 1,
-		token        => $token,
 	}]);
 
 can_ok    $obj, 'serialize';
@@ -64,11 +56,6 @@ can_ok    $obj, 'type';
 method_ok $obj, type => [], 'ProcessACH';
 
 method_ok $obj, serialize => [], {
-	Token => {
-		TerminalID  => '00000000-0000-0000-0000-000000000000',
-		TerminalKey => '000000000',
-	},
-	TestMode     => 'True',
 	Amount       => 4.22,
 	Currency     => 'USD',
 	CheckNumber  => '022',

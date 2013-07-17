@@ -3,11 +3,11 @@ use strict;
 use warnings;
 use namespace::autoclean;
 
-our $VERSION = '0.001004'; # VERSION
+our $VERSION = '0.001005'; # VERSION
 
 use Moose;
 
-extends 'Business::PaperlessTrans::MessagePart';
+extends 'MooseY::RemoteHelper::MessagePart';
 
 with qw(
 	MooseX::RemoteHelper::CompositeSerialization
@@ -24,13 +24,6 @@ has type => (
 	builder => '_build_type',
 );
 
-has token => (
-	remote_name => 'token',
-	isa         => 'Business::PaperlessTrans::RequestPart::AuthenticationToken',
-	is          => 'rw',
-	required    => 1,
-);
-
 __PACKAGE__->meta->make_immutable;
 1;
 # ABSTRACT: Test Connection
@@ -45,7 +38,7 @@ Business::PaperlessTrans::Request::TestConnection - Test Connection
 
 =head1 VERSION
 
-version 0.001004
+version 0.001005
 
 =head1 DESCRIPTION
 
