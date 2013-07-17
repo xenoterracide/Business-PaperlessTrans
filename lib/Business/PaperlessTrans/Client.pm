@@ -12,10 +12,12 @@ use Data::Printer alias => 'Dumper';
 use Carp;
 
 use MooseX::Types::Path::Class qw( File Dir );
+use File::ShareDir::ProjectDistDir ':all', defaults => { pathclass => 1 };
 
 use XML::Compile::WSDL11;
 use XML::Compile::SOAP11;
 use XML::Compile::Transport::SOAPHTTP;
+
 
 with 'MooseY::RemoteHelper::Role::Client';
 
@@ -94,27 +96,19 @@ sub _build_wsdl {
 }
 
 sub _build_wsdl_file {
-	load 'File::ShareDir::ProjectDistDir', 'dist_file';
-
-	return load_class('Path::Class::File')->new(
-		dist_file(
-			'Business-OnlinePayment-PaperlessTrans',
-			'svc.paperlesstrans.wsdl'
-		)
+	return dist_file(
+		'Business-OnlinePayment-PaperlessTrans',
+		'svc.paperlesstrans.wsdl'
 	);
 }
 
 sub _build_xsd_files {
-	load 'File::ShareDir::ProjectDistDir', 'dist_file';
-
 	my @xsd;
 	foreach ( 0..6 ) {
 		my $file
-			= load_class('Path::Class::File')->new(
-				dist_file(
-					'Business-OnlinePayment-PaperlessTrans',
-					"svc.paperlesstrans.$_.xsd"
-				)
+			= dist_file(
+				'Business-OnlinePayment-PaperlessTrans',
+				"svc.paperlesstrans.$_.xsd"
 			);
 
 		push @xsd, $file;

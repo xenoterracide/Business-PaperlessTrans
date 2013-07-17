@@ -1,7 +1,7 @@
 Revision history for Business-PaperlessTrans
 0.001005  2013-07-17
 	- migrate to using MooseY::RemoteHelper::Role::Client
-	  	- standarizes client interface
+		- standarizes client interface
 	- migrate to using MooseY::RemoteHelper::MessagePart
 
 0.001004  2013-06-06
