@@ -3,23 +3,16 @@ use warnings;
 use Test::More;
 use Test::Method;
 use Class::Load 0.20 'load_class';
-use Test::Requires::Env qw(
-	PERL_BUSINESS_BACKOFFICE_USERNAME
-	PERL_BUSINESS_BACKOFFICE_PASSWORD
-);
+use Test::Requires::Env qw( PAPERLESSTRANS_USER PAPERLESSTRANS_PASS );
 
 my $req_prefix = 'Business::PaperlessTrans::Request';
 my $prefix     = $req_prefix . 'Part::';
 
-my $token
-	= new_ok( load_class( $prefix . 'AuthenticationToken' ) => [{
-		terminal_id  => $ENV{PERL_BUSINESS_BACKOFFICE_USERNAME},
-		terminal_key => $ENV{PERL_BUSINESS_BACKOFFICE_PASSWORD},
-	}]);
-
 my $client
 	= new_ok( load_class('Business::PaperlessTrans::Client') => [{
-		debug => $ENV{PERL_BUSINESS_BACKOFFICE_DEBUG},
+		test => 1,
+		user => $ENV{PAPERLESSTRANS_USER},
+		pass => $ENV{PAPERLESSTRANS_PASS},
 	}]);
 
 my $address
@@ -64,8 +57,6 @@ my $req
 		currency     => 'USD',
 		check_number => '022',
 		check        => $check,
-		test         => 1,
-		token        => $token,
 	}]);
 
 method_ok $req, type => [], 'ProcessACH';

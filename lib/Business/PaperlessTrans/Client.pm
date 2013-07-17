@@ -17,16 +17,12 @@ use XML::Compile::WSDL11;
 use XML::Compile::SOAP11;
 use XML::Compile::Transport::SOAPHTTP;
 
+with 'MooseY::RemoteHelper::Role::Client';
+
 sub submit {
 	my ( $self, $request ) = @_;
 
-	my %request;
-	if ( $request->type eq 'TestConnection' ) {
-		%request = ( %{ $request->serialize });
-	}
-	else {
-		%request = ( req => $request->serialize );
-	}
+	my %request = %{ $self->_finalize_request( $request ) };
 
 	Dumper %request if $self->debug >= 1;
 
@@ -42,6 +38,32 @@ sub submit {
 	my $res_c = 'Business::PaperlessTrans::Response::' . $request->type;
 
 	return load_class( $res_c )->new( $res );
+}
+
+sub _finalize_request {
+	my ( $self, $request ) = @_;
+
+	my %request;
+	if ( $request->type eq 'TestConnection' ) {
+		%request = ( %{ $request->serialize },
+			token => {
+				TerminalID  => $self->user,
+				TerminalKey => $self->pass,
+			},
+		);
+	}
+	else {
+		%request = ( req => {
+			%{ $request->serialize },
+			Token => {
+				TerminalID  => $self->user,
+				TerminalKey => $self->pass,
+			},
+			TestMode => $self->test ? 'True' : 'False',
+		});
+	}
+
+	return \%request;
 }
 
 sub _build_calls {
@@ -99,13 +121,6 @@ sub _build_xsd_files {
 	}
 	return \@xsd;
 }
-
-has debug => (
-	isa      => 'Int',
-	is       => 'ro',
-	lazy     => 1,
-	default  => 0,
-);
 
 has _calls => (
 	isa     => 'HashRef',

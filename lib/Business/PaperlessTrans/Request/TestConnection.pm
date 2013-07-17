@@ -24,13 +24,6 @@ has type => (
 	builder => '_build_type',
 );
 
-has token => (
-	remote_name => 'token',
-	isa         => 'Business::PaperlessTrans::RequestPart::AuthenticationToken',
-	is          => 'rw',
-	required    => 1,
-);
-
 __PACKAGE__->meta->make_immutable;
 1;
 # ABSTRACT: Test Connection
