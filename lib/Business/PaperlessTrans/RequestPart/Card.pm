@@ -7,7 +7,7 @@ use namespace::autoclean;
 
 use Moose;
 
-extends 'Business::PaperlessTrans::MessagePart';
+extends 'MooseY::RemoteHelper::MessagePart';
 with qw(
 	MooseX::RemoteHelper::CompositeSerialization
 	Business::PaperlessTrans::Role::Address

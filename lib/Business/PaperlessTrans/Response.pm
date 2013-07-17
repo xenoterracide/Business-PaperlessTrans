@@ -6,7 +6,7 @@ use namespace::autoclean;
 # VERSION
 
 use Moose;
-extends 'Business::PaperlessTrans::MessagePart';
+extends 'MooseY::RemoteHelper::MessagePart';
 
 use MooseX::Types::Common::String qw( SimpleStr );
 use Moose::Util::TypeConstraints  qw( enum      );

@@ -7,7 +7,7 @@ use namespace::autoclean;
 
 use Moose;
 
-extends 'Business::PaperlessTrans::MessagePart';
+extends 'MooseY::RemoteHelper::MessagePart';
 
 use MooseX::Types::Common::String qw( NonEmptySimpleStr );
 

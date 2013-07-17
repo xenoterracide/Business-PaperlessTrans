@@ -6,7 +6,7 @@ use namespace::autoclean;
 # VERSION
 
 use Moose;
-extends 'Business::PaperlessTrans::MessagePart';
+extends 'MooseY::RemoteHelper::MessagePart';
 
 use Class::Load 0.20 'load_class';
 
