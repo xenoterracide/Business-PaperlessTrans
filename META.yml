@@ -105,7 +105,7 @@ requires:
   Carp: 0
   Class::Load: 0.20
   Data::Printer: 0
-  File::ShareDir::ProjectDistDir: 0
+  File::ShareDir::ProjectDistDir: v0.4.0
   LWP::Protocol::https: 0
   Module::Load: 0
   Moose: 0
