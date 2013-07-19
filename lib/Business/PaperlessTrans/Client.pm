@@ -7,11 +7,11 @@ use namespace::autoclean;
 
 use Moose;
 use Class::Load 0.20 'load_class';
-use Module::Load 'load';
 use Data::Printer alias => 'Dumper';
 use Carp;
 
-use MooseX::Types::Path::Class qw( File Dir );
+use MooseX::Types::Path::Class     qw( File Dir           );
+use File::ShareDir::ProjectDistDir qw( dist_file dist_dir );
 
 use XML::Compile::WSDL11;
 use XML::Compile::SOAP11;
@@ -94,25 +94,21 @@ sub _build_wsdl {
 }
 
 sub _build_wsdl_file {
-	load 'File::ShareDir::ProjectDistDir', 'dist_file';
-
 	return load_class('Path::Class::File')->new(
 		dist_file(
-			'Business-OnlinePayment-PaperlessTrans',
+			'Business-PaperlessTrans',
 			'svc.paperlesstrans.wsdl'
 		)
 	);
 }
 
 sub _build_xsd_files {
-	load 'File::ShareDir::ProjectDistDir', 'dist_file';
-
 	my @xsd;
 	foreach ( 0..6 ) {
 		my $file
 			= load_class('Path::Class::File')->new(
 				dist_file(
-					'Business-OnlinePayment-PaperlessTrans',
+					'Business-PaperlessTrans',
 					"svc.paperlesstrans.$_.xsd"
 				)
 			);
