@@ -26,7 +26,6 @@ my %WriteMakefileArgs = (
     "Carp" => 0,
     "Class::Load" => "0.20",
     "Data::Printer" => 0,
-    "File::ShareDir" => 0,
     "File::ShareDir::ProjectDistDir" => "v0.4.0",
     "LWP::Protocol::https" => 0,
     "Moose" => 0,
@@ -54,6 +53,7 @@ my %WriteMakefileArgs = (
   },
   "TEST_REQUIRES" => {
     "Test::Method" => 0,
+    "Test::Moose" => 0,
     "Test::More" => "0.88",
     "Test::Requires::Env" => 0
   },

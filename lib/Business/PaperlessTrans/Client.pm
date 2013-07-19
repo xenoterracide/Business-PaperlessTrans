@@ -10,8 +10,8 @@ use Class::Load 0.20 'load_class';
 use Data::Printer alias => 'Dumper';
 use Carp;
 
-use MooseX::Types::Path::Class qw( File Dir );
-use File::ShareDir qw( dist_file dist_dir );
+use MooseX::Types::Path::Class     qw( File Dir           );
+use File::ShareDir::ProjectDistDir qw( dist_file dist_dir );
 
 use XML::Compile::WSDL11;
 use XML::Compile::SOAP11;

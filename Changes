@@ -1,5 +1,7 @@
 Revision history for Business-PaperlessTrans
 0.001005  2013-07-19
+	- fix bug that would have prevented this from working due to wrong dist
+	  name in ShareDir code
 	- migrate to using MooseY::RemoteHelper::Role::Client
 		- standarizes client interface
 	- migrate to using MooseY::RemoteHelper::MessagePart
