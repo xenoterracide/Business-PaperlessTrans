@@ -96,7 +96,7 @@ sub _build_wsdl {
 sub _build_wsdl_file {
 	return load_class('Path::Class::File')->new(
 		dist_file(
-			'Business-OnlinePayment-PaperlessTrans',
+			'Business-PaperlessTrans',
 			'svc.paperlesstrans.wsdl'
 		)
 	);
@@ -108,7 +108,7 @@ sub _build_xsd_files {
 		my $file
 			= load_class('Path::Class::File')->new(
 				dist_file(
-					'Business-OnlinePayment-PaperlessTrans',
+					'Business-PaperlessTrans',
 					"svc.paperlesstrans.$_.xsd"
 				)
 			);
