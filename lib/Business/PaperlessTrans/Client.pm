@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use namespace::autoclean;
 
-our $VERSION = '0.001005'; # VERSION
+our $VERSION = '0.002000'; # VERSION
 
 use Moose;
 use Class::Load 0.20 'load_class';
@@ -168,7 +168,7 @@ Business::PaperlessTrans::Client - PaperlessTrans Client object
 
 =head1 VERSION
 
-version 0.001005
+version 0.002000
 
 =head1 DESCRIPTION
 

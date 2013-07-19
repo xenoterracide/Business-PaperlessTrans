@@ -2,7 +2,7 @@ NAME
     Business::PaperlessTrans::Client - PaperlessTrans Client object
 
 VERSION
-    version 0.001005
+    version 0.002000
 
 DESCRIPTION
     PaperlessTrans is a secure and seamless bridge between your IT

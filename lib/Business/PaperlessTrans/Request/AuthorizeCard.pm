@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use namespace::autoclean;
 
-our $VERSION = '0.001005'; # VERSION
+our $VERSION = '0.002000'; # VERSION
 
 use Moose;
 extends 'Business::PaperlessTrans::Request';
@@ -30,7 +30,7 @@ Business::PaperlessTrans::Request::AuthorizeCard - AuthorizeCard Request
 
 =head1 VERSION
 
-version 0.001005
+version 0.002000
 
 =head1 AUTHOR
 
