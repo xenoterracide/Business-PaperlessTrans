@@ -11,7 +11,7 @@ use Data::Printer alias => 'Dumper';
 use Carp;
 
 use MooseX::Types::Path::Class qw( File Dir );
-use File::ShareDir qw(:all);
+use File::ShareDir qw( dist_file dist_dir );
 
 use XML::Compile::WSDL11;
 use XML::Compile::SOAP11;
